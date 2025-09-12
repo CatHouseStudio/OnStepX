@@ -9,7 +9,7 @@
 #include <Arduino.h>
 #include "Constants.h"
 #include "lib/Constants.h"
-#include "../Config.h"
+#include "./Config.h"
 #include "Config.defaults.h"
 
 #ifdef USES_HW_SPI
