@@ -2,14 +2,12 @@
 
 #include "Ina226Plugin.h"
 #include "../../Common.h"
-#include "../../lib/serial/Serial_Local.h"
-#include "../../lib/tasks/OnTask.h"
+#include "../../lib/ethernet/webServer/WebServer.h"
+#include "../../lib/wifi/webServer/WebServer.h"
 
 #include "INA226.h"
 
 INA226 ina226(INA226_ADDRESS);
-
-void ina226PluginWrapper() { ina226Plugin.loop(); }
 
 static inline float estimateSOC(float voltage)
 {
@@ -60,21 +58,31 @@ void Ina226Plugin::init()
 
 void Ina226Plugin::handleHttp()
 {
-  float busV     = ina.getBusVoltage();
-  float curr_mA  = ina.getCurrent_mA();
-  float power_mW = ina.getPower_mW();
-  float shunt_mV = ina.getShuntVoltage_mV();
-  float percent  = estimateSOC(busV);
+    float busV = ina226.getBusVoltage();
+    float curr_mA = ina226.getCurrent_mA();
+    float power_mW = ina226.getPower_mW();
+    float shunt_mV = ina226.getShuntVoltage_mV();
+    float percent = estimateSOC(busV);
 
-  String out;
-  out.reserve(160);
-  out += "bus_V=";      out += String(busV, 3);     out += "\n";
-  out += "current_mA="; out += String(curr_mA, 2);  out += "\n";
-  out += "power_mW=";   out += String(power_mW, 2); out += "\n";
-  out += "shunt_mV=";   out += String(shunt_mV, 2); out += "\n";
-  out += "batterySOC="; out += String(percent, 1);  out += "%\n"; 
+    String out;
+    out.reserve(160);
+    out += "bus_V=";
+    out += String(busV, 3);
+    out += "\n";
+    out += "current_mA=";
+    out += String(curr_mA, 2);
+    out += "\n";
+    out += "power_mW=";
+    out += String(power_mW, 2);
+    out += "\n";
+    out += "shunt_mV=";
+    out += String(shunt_mV, 2);
+    out += "\n";
+    out += "batterySOC=";
+    out += String(percent, 1);
+    out += "%\n";
 
-  www.send(200, "text/plain", out);
+    www.send(200, "text/plain", out);
 }
 
 Ina226Plugin ina226Plugin;
