@@ -32,8 +32,8 @@
 #include "metrics/MetricsPlugin.h"               //         Specify the header file to include the class.
 #define PLUGIN4_COMMAND_PROCESSING    OFF //    OFF, Set to ON for plugins that allow command processing
 
-#define PLUGIN5                       OFF //    OFF, Specify the class instance (same as plugin directory name) to enable.    Option
-//#include "plugin5/Name.h"               //         Specify the header file to include the class.
+#define PLUGIN5                       ina226Plugin //    OFF, Specify the class instance (same as plugin directory name) to enable.    Option
+#include "ina226/Ina226Plugin.h"               //         Specify the header file to include the class.
 #define PLUGIN5_COMMAND_PROCESSING    OFF //    OFF, Set to ON for plugins that allow command processing
 
 #define PLUGIN6                       OFF //    OFF, Specify the class instance (same as plugin directory name) to enable.    Option
