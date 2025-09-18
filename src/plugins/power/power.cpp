@@ -1,6 +1,6 @@
 // Power plugin
 
-#include "Power.h"
+#include "./Power.h"
 #include "../../Common.h"
 #include "../../lib/serial/Serial_Local.h"
 #include "../../lib/tasks/OnTask.h"
